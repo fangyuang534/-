@@ -1,0 +1,60 @@
+# ============================================================
+# 鸟类多模态分类实验 —— Git 忽略规则
+# 原则：代码与文档入库；数据、权重、虚拟环境、运行产物一律不入库
+# ============================================================
+
+# ---------- 数据集（体积大 + 学术使用条款，见 docs/DATASET.md）----------
+data/
+数据集/
+CUB_200_subset.zip
+*.zip
+
+# ---------- 训练产物 / 模型权重（可由脚本重新生成）----------
+outputs/
+runs/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.safetensors
+*.npz
+*.npy
+
+# ---------- 虚拟环境 / 依赖缓存 ----------
+.venv/
+venv/
+env/
+.conda/
+pip-build-tracker-*/
+pip-install-*/
+pip-unpack-*/
+pip-ephem-wheel-cache-*/
+*.egg-info/
+build/
+dist/
+
+# ---------- Python 缓存 ----------
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+
+# ---------- 日志 ----------
+*.log
+wandb/
+lightning_logs/
+
+# ---------- 编辑器 / 操作系统 ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+
+# ---------- 本地缓存 / 环境变量 ----------
+.cache/
+hf_cache/
+.env

@@ -1,0 +1,29 @@
+name: ci
+
+# 只做"轻量静态检查"：不装 torch、不训练，几十秒就能跑完。
+# 真正的实验需要 GPU 和数据，放在本地跑（见 README）。
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install minimal deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Repository static check
+        run: python tests/check_repo.py

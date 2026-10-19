@@ -1,0 +1,22 @@
+# 单模态基线 ①：Image-Only（ResNet18）
+# 用法：python src/train_image_only.py --config configs/image_only.yaml
+modality: image
+data_root: data/cub200_subset
+ann_file: data/cub200_subset/annotations.json
+out_dir: outputs/image_only
+
+image_backbone: resnet18      # resnet18 / resnet34 / resnet50
+image_pretrained: true        # 用 ImageNet 预训练权重（强烈建议 true）
+image_size: 224
+
+epochs: 15
+batch_size: 32
+lr: 0.0003                    # AdamW 全参数微调
+weight_decay: 0.0001
+dropout: 0.2
+label_smoothing: 0.1
+scheduler: cosine
+amp: true
+num_workers: 4
+seed: 42
+device: cuda

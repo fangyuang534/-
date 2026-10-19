@@ -1,0 +1,24 @@
+# 单模态基线 ②：Text-Only（BERT-base-uncased, mean pooling）
+# 用法：python src/train_text_only.py --config configs/text_only.yaml
+modality: text
+data_root: data/cub200_subset
+ann_file: data/cub200_subset/annotations.json
+out_dir: outputs/text_only
+
+text_model: bert-base-uncased
+text_pooling: mean           # mean（推荐）或 cls
+freeze_text: false           # 文本单模态必须微调 BERT，否则指标很低
+max_length: 48               # CUB 的描述约 10~25 个词，48 足够
+
+epochs: 12
+batch_size: 32
+lr: 0.001                    # 新初始化的分类头：大学习率
+backbone_lr: 0.00002         # BERT 主干：小学习率（2e-5，与参考脚本一致）
+weight_decay: 0.01
+dropout: 0.2
+label_smoothing: 0.1
+scheduler: cosine
+amp: true
+num_workers: 0               # 文本数据集不读图，0 最省事
+seed: 42
+device: cuda

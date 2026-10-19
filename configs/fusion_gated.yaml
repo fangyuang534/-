@@ -1,0 +1,29 @@
+# 多模态 · ④ Gated Fusion：a = sigmoid(W[img;txt])，fused = a*img + (1-a)*txt
+# 用法：python src/train_multimodal.py --config configs/fusion_gated.yaml
+modality: multimodal
+fusion: gated
+data_root: data/cub200_subset
+ann_file: data/cub200_subset/annotations.json
+out_dir: outputs/fusion_gated
+
+proj_dim: 256
+image_backbone: resnet18
+image_pretrained: true
+freeze_image: false
+text_model: bert-base-uncased
+freeze_text: true
+text_pooling: mean
+max_length: 48
+image_size: 224
+
+epochs: 8
+batch_size: 32
+lr: 0.0003
+weight_decay: 0.0001
+dropout: 0.2
+label_smoothing: 0.1
+scheduler: cosine
+amp: true
+num_workers: 4
+seed: 42
+device: cuda

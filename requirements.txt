@@ -1,0 +1,22 @@
+# ============================================================
+# 鸟类多模态分类实验 —— 依赖清单
+# 安装（先装 torch，见 README 第 1 节；再装其余的）：
+#   pip install -r requirements.txt
+# 国内加速：
+#   pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+# ============================================================
+
+torch>=2.4.0          # 建议按官网命令装 CUDA 版：pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
+torchvision>=0.19.0
+transformers>=4.40.0  # BERT / CLIP
+huggingface_hub>=0.23.0
+
+pillow>=9.5.0
+numpy>=1.24.0
+tqdm>=4.65.0
+PyYAML>=6.0
+
+# 可视化与额外指标（代码里都做了 try/except，不装也能跑，只是少几张图）
+matplotlib>=3.7.0
+scikit-learn>=1.2.0   # 可选：CLIP 线性探针
+pandas>=2.0.0         # 可选：整理结果表

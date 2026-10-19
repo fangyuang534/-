@@ -1,0 +1,31 @@
+# 多模态 · ③ Cross-Attention Fusion（推荐）
+# 图像 token [B,49,256] 作 Query，文本 token [B,L,256] 作 Key/Value
+# 用法：python src/train_multimodal.py --config configs/fusion_attention.yaml
+modality: multimodal
+fusion: attention
+data_root: data/cub200_subset
+ann_file: data/cub200_subset/annotations.json
+out_dir: outputs/fusion_attention
+
+proj_dim: 256                # 必须能被 num_heads 整除
+num_heads: 8                 # 8 个注意力头，导出权重时对头取平均
+image_backbone: resnet18
+image_pretrained: true
+freeze_image: false
+text_model: bert-base-uncased
+freeze_text: true
+text_pooling: mean
+max_length: 48
+image_size: 224
+
+epochs: 8
+batch_size: 32               # 49 个视觉 token × 注意力，显存不够就降到 16
+lr: 0.0003
+weight_decay: 0.0001
+dropout: 0.2
+label_smoothing: 0.1
+scheduler: cosine
+amp: true
+num_workers: 4
+seed: 42
+device: cuda
